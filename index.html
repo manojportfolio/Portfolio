@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manojkumar | Portfolio</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Manojkumar's portfolio - Web Developer, UI/UX Designer, and Frontend Developer.">
+  <meta name="keywords" content="portfolio, web developer, UI/UX, frontend, Manojkumar">
+  <meta name="author" content="Manojkumar">
+
+  <!-- Font Awesome -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  
+  <!-- Chart.js for Skills Section -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+  
+  <!-- EmailJS for Contact Form -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #0c0c0c;
+      color: white;
+      scroll-behavior: smooth;
+    }
+
+    /* Header/Navbar Styles */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: #011f34;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .logo {
+      color: white;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    /* Desktop Navigation */
+    nav {
+      display: flex;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      padding: 5px 10px;
+    }
+
+    nav ul li a:hover {
+      color: #00d9ff;
+    }
+
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+      display: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+      background: transparent;
+      border: none;
+      z-index: 1001;
+    }
+
+    /* Mobile Navigation */
+    @media (max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+      
+      .menu-toggle {
+        display: block;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        background: #011f34;
+        width: 70%;
+        height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px;
+        transition: right 0.3s ease;
+      }
+
+      nav.active {
+        right: 0;
+      }
+
+      nav ul {
+        flex-direction: column;
+        gap: 30px;
+      }
+      
+      nav ul li a {
+        font-size: 20px;
+        display: block;
+        padding: 10px;
+      }
+    }
+
+    /* Section Styles */
+    section {
+      min-height: 100vh;
+      padding: 100px 30px 50px;
+      scroll-margin-top: 70px;
+    }
+
+    /* Home Section */
+    #home {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      text-align: left;
+    }
+
+    .content {
+      max-width: 500px;
+      margin: 20px;
+    }
+    h4{
+      color: white;
+      font-size: 25px;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
+
+    h1 {
+      font-size: 50px;
+      color: #00d9ff;
+    }
+
+    .typing {
+      color: #ff0077;
+      font-weight: bold;
+    }
+
+    .image-container {
+      position: relative;
+      margin: 20px;
+    }
+
+    .image-container img {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      border: 5px solid white;
+      box-shadow: 0 0 30px #00d9ff;
+    }
+
+    /* About Section */
+    #about {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+      max-width: 800px;
+      background-color: #021624;
+      margin: 0 auto;
+    }
+
+    #about .image-container img {
+      width: 250px;
+      height: 250px;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    #about .image-container img:hover {
+      transform: scale(1.05);
+    }
+
+    .about-content {
+      width: 100%;
+    }
+
+    h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    h2 span {
+      color: #00d9ff;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    /* Button */
+    .btn {
+      display: inline-block;
+      padding: 12px 28px;
+      background: #00d9ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: bold;
+      transition: 0.3s ease;
+      text-align: center;
+      box-shadow: 0px 4px 8px rgba(0, 217, 255, 0.3);
+    }
+
+    .btn:hover {
+      background: #ff0077;
+      box-shadow: 0px 4px 12px rgba(255, 0, 119, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Skills Section */
+    .skills-container {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+    }
+
+    .technical-skills, .soft-skills {
+      width: 45%;
+    }
+
+    h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #00d9ff;
+    }
+
+    .skill {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .skill p {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+
+    .progress-bar {
+      background: #333;
+      height: 8px;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar span {
+      display: block;
+      height: 100%;
+      background: #00d9ff;
+      border-radius: 5px;
+    }
+
+    .soft-skills-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .soft-skills-group {
+      margin-bottom: 30px;
+    }
+
+    .soft-skills-group h4 {
+      font-size: 20px;
+      margin-bottom: 15px;
+      color: #ffffff;
+      text-align: left;
+      padding-left: 10px;
+    }
+
+    .chart-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .circular-chart {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 15px;
+    }
+
+    .circular-chart canvas {
+      width: 150px;
+      height: 150px;
+    }
+
+    .circular-chart p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 16px;
+      font-weight: bold;
+      width: 100%;
+      padding: 0 10px;
+    }
+
+    /* Contact Section */
+    .contact-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 40px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .contact-info, .contact-form {
+      background: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      flex: 1 1 300px;
+    }
+
+    .contact-info h2 {
+      font-size: 32px;
+      color: #00d9ff;
+    }
+
+    .contact-info p {
+      font-size: 18px;
+      line-height: 1.6;
+      margin: 15px 0;
+    }
+
+    .contact-details i {
+      margin-right: 10px;
+      color: #00d9ff;
+    }
+
+    .social-icons {
+      margin-top: 20px;
+    }
+
+    .social-icons a {
+      margin: 0 10px;
+      color: #00d9ff;
+      font-size: 24px;
+      transition: transform 0.3s, color 0.3s;
+    }
+
+    .social-icons a:hover {
+      transform: scale(1.2);
+      color: white;
+    }
+
+    .contact-form h3 {
+      color: #00d9ff;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #00d9ff;
+      border-radius: 5px;
+      background: rgba(255, 255, 255, 0.05);
+      color: white;
+      font-size: 16px;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: #ff0077;
+      outline: none;
+    }
+
+    .contact-form button {
+      background-color: #00d9ff;
+      color: #011f34;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 16px;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    .contact-form button:hover {
+      background: #ff0077;
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .status-message {
+      margin-top: 15px;
+      display: none;
+      padding: 12px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .success {
+      background-color: #4CAF50;
+      display: block;
+    }
+
+    .error {
+      background-color: #f44336;
+      display: block;
+    }
+
+    footer {
+      margin-top: 0;
+      background-color: #011f34;
+      padding: 20px;
+      color: white;
+      text-align: center;
+      font-size: 16px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      #home {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .content h1 {
+        font-size: 36px;
+      }
+
+      .content h3,
+      .content p {
+        font-size: 16px;
+      }
+
+      .image-container img {
+        width: 200px;
+        height: 200px;
+      }
+
+      .skills-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .technical-skills, .soft-skills {
+        width: 90%;
+        margin-bottom: 30px;
+      }
+      
+      .circular-chart {
+        width: 120px;
+        height: 120px;
+        margin: 10px;
+      }
+      
+      .circular-chart canvas {
+        width: 120px;
+        height: 120px;
+      }
+      
+      .chart-container {
+        justify-content: center;
+      }
+
+      .contact-info, .contact-form {
+        padding: 20px;
+      }
+
+      .contact-info h2 {
+        font-size: 28px;
+      }
+
+      .contact-form h3 {
+        font-size: 24px;
+      }
+
+      .contact-info p {
+        font-size: 16px;
+      }
+
+      .social-icons a {
+        font-size: 20px;
+        margin: 0 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2 class="logo">My Portfolio</h2>
+    <button class="menu-toggle" id="menu-toggle">
+      <i class="fa-solid fa-bars" id="menu-icon"></i>
+    </button>
+    <nav id="navbar">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Home Section -->
+  <section id="home" class="hero">
+    <div class="content">
+      <h4>Hello, It's Me</h4>
+      <h1>Manojkumar</h1>
+      <h3>And I'm a <span class="typing"></span></h3>
+      <p>I am a web developer, UI/UX designer, Frontend Developer, and content creator.</p>
+    </div>
+    <div class="image-container">
+      <img src="new.jpg" alt="Profile Picture">
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    
+    <div class="about-content">
+      <h2>About <span>Me</span></h2>
+      
+      <p>
+        Hello! I'm Manojkumar, a creative and detail-oriented Web Designer & Frontend Developer with a passion for crafting beautiful, user-friendly digital experiences. With expertise in UI/UX design and content creation, I bring ideas to life through clean code and thoughtful design.
+      </p>
+      
+      <h2> My Design <span>Philosophy</span></h2>
+
+      <p>
+        I believe that great design is equal parts aesthetics and functionality. My approach combines visual appeal with intuitive user experiences, ensuring that every website I create is not only stunning but also easy to navigate and accessible to all users.
+      </p>
+
+      <h2> What I <span>Do</span></h2>
+
+      <p>
+        As a multidisciplinary digital creator, I specialize in:<br>
+✔ <strong>Web Design & Development</strong> – Building responsive, modern websites with HTML, CSS, and JavaScript<br>
+✔ <strong>Frontend Development</strong> – Creating interactive user interfaces with React and Vue.js<br>
+✔ <strong>UI/UX Design</strong> – Crafting user-centered designs with Figma and Adobe XD<br>
+✔ <strong>Content Creation</strong> – Developing engaging digital content for brands and businesses<br>
+✔ <strong>Responsive Design</strong> – Ensuring seamless experiences across all devices<br>
+✔ <strong>Performance Optimization</strong> – Making websites fast and efficient<br>
+      </p>
+
+      <h2> My <span>Tools</span></h2>
+     <p>
+      I work with a variety of technologies including HTML5, CSS3, JavaScript, React, Figma, Adobe Creative Suite, WordPress, and more. I'm constantly learning new tools and techniques to stay at the forefront of web design and development.
+     </p>
+
+     <h2>Lets <span>Connect</span></h2>
+
+     <p>
+      I'm always excited to collaborate on new projects or discuss design and development opportunities. Feel free to reach out if you'd like to work together or just chat about the latest web trends!<br>
+
+📩 Email: smanoj08162004@gmail.com<br>
+🔗 LinkedIn: manojkumar-design<br>
+     </p>
+
+      <a href="#home" class="btn">View My Portfolio</a>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>My <span>Skills</span></h2>
+    <div class="skills-container">
+      <div class="technical-skills">
+        <h3>Technical Skills</h3>
+        <div class="skill">
+          <p>HTML/CSS</p>
+          <div class="progress-bar"><span style="width: 95%;"></span></div>
+        </div>
+        <div class="skill">
+          <p>JavaScript</p>
+          <div class="progress-bar"><span style="width: 85%;"></span></div>
+        </div>
+        <div class="skill">
+          <p>PHP</p>
+          <div class="progress-bar"><span style="width: 80%;"></span></div>
+        </div>
+        <div class="skill">
+          <p>Java</p>
+          <div class="progress-bar"><span style="width: 75%;"></span></div>
+        </div>
+        <div class="skill">
+          <p>MongoDB</p>
+          <div class="progress-bar"><span style="width: 70%;"></span></div>
+        </div>
+        <div class="skill">
+          <p>UI/UX Design</p>
+          <div class="progress-bar"><span style="width: 90%;"></span></div>
+        </div>
+      </div>
+
+      <div class="soft-skills">
+        <h3>Personal Attributes</h3>
+        <div class="soft-skills-container">
+          <div class="soft-skills-group">
+            <h4>Soft Skills</h4>
+            <div class="chart-container">
+              <div class="circular-chart">
+                <canvas id="communicationChart"></canvas>
+                <p>Communication</p>
+              </div>
+              <div class="circular-chart">
+                <canvas id="timeManagementChart"></canvas>
+                <p>Time Management</p>
+              </div>
+              <div class="circular-chart">
+                <canvas id="teamworkChart"></canvas>
+                <p>Teamwork</p>
+              </div>
+              <div class="circular-chart">
+                <canvas id="creativityChart"></canvas>
+                <p>Creativity</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="soft-skills-group">
+            <h4>Interests & Activities</h4>
+            <div class="chart-container">
+              <div class="circular-chart">
+                <canvas id="contentCreationChart"></canvas>
+                <p>Content Creation</p>
+              </div>
+              <div class="circular-chart">
+                <canvas id="volleyballChart"></canvas>
+                <p>Volleyball</p>
+              </div>
+              <div class="circular-chart">
+                <canvas id="problemSolvingChart"></canvas>
+                <p>Problem Solving</p>
+              </div>
+              <div class="circular-chart">
+                <canvas id="learningChart"></canvas>
+                <p>Continuous Learning</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <div class="contact-container">
+      <div class="contact-info">
+        <h2>Get In <span>Touch</span></h2>
+        <p>I'm always excited to collaborate on new projects or discuss creative opportunities. Feel free to reach out!</p>
+        <p><i class="fas fa-envelope"></i> smanoj08162004@gmail.com</p>
+        <p><i class="fas fa-phone"></i> +91 8111010353</p>
+        <p><i class="fas fa-map-marker-alt"></i> Namakkal, India</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-dribbble"></i></a>
+          <a href="#"><i class="fab fa-behance"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Send Me a Message</h3>
+        <form id="contact-form">
+          <input type="text" name="name" placeholder="Your Name" required />
+          <input type="email" name="email" placeholder="Your Email" required />
+          <input type="text" name="title" placeholder="Subject" />
+          <textarea name="message" rows="5" placeholder="Your Project Details or Message" required></textarea>
+          <button type="submit">Send Message <i class="fas fa-paper-plane"></i></button>
+        </form>
+        <div id="statusMessage" class="status-message"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2023 Manojkumar. All rights reserved.
+  </footer>
+
+  <script>
+    // Typing Animation
+    const textArray = ["web developer", "UI/UX designer", "Frontend Developer", "content creator"];
+    let index = 0;
+    let letterIndex = 0;
+    const typingElement = document.querySelector(".typing");
+
+    function typeText() {
+      if (letterIndex < textArray[index].length) {
+        typingElement.textContent += textArray[index][letterIndex];
+        letterIndex++;
+        setTimeout(typeText, 150);
+      } else {
+        setTimeout(eraseText, 2000);
+      }
+    }
+
+    function eraseText() {
+      if (letterIndex > 0) {
+        typingElement.textContent = textArray[index].substring(0, letterIndex - 1);
+        letterIndex--;
+        setTimeout(eraseText, 100);
+      } else {
+        index = (index + 1) % textArray.length;
+        setTimeout(typeText, 500);
+      }
+    }
+
+    // Mobile menu toggle functionality
+    const menuToggle = document.getElementById('menu-toggle');
+    const navbar = document.getElementById('navbar');
+    const menuIcon = document.getElementById('menu-icon');
+
+    menuToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      navbar.classList.toggle('active');
+      menuIcon.classList.toggle('fa-bars');
+      menuIcon.classList.toggle('fa-times');
+    });
+
+    // Close menu when clicking on a link
+    document.querySelectorAll('#navbar a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+          navbar.classList.remove('active');
+          menuIcon.classList.replace('fa-times', 'fa-bars');
+        }
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth <= 768 && 
+          navbar.classList.contains('active') &&
+          !navbar.contains(e.target) && 
+          !menuToggle.contains(e.target)) {
+        navbar.classList.remove('active');
+        menuIcon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+
+    // Close menu when window is resized to desktop size
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && navbar.classList.contains('active')) {
+        navbar.classList.remove('active');
+        menuIcon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+
+    // Initialize EmailJS
+    (function() {
+      emailjs.init("qsLYULPi6hy9_EaMw");
+    })();
+
+    // Contact form submission
+    const form = document.getElementById("contact-form");
+    const msg = document.getElementById("statusMessage");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+      emailjs.sendForm("service_z229prp", "template_hs7iyyt", this)
+        .then(() => {
+          msg.textContent = "Message sent successfully!";
+          msg.className = "status-message success";
+          form.reset();
+          setTimeout(() => {
+            msg.textContent = "";
+            msg.className = "status-message";
+          }, 4000);
+        }, (error) => {
+          msg.textContent = "Failed to send message. Please try again.";
+          msg.className = "status-message error";
+          console.error("EmailJS Error:", error);
+          setTimeout(() => {
+            msg.textContent = "";
+            msg.className = "status-message";
+          }, 4000);
+        });
+    });
+
+    // Initialize Charts when DOM is loaded
+    document.addEventListener("DOMContentLoaded", function() {
+      // Start typing animation
+      setTimeout(typeText, 500);
+      
+      // Create charts for skills section
+      function createChart(canvasId, percentage) {
+        let ctx = document.getElementById(canvasId).getContext("2d");
+        new Chart(ctx, {
+          type: "doughnut",
+          data: {
+            datasets: [{ 
+              data: [percentage, 100 - percentage], 
+              backgroundColor: ["#00d9ff", "#333"], 
+              borderWidth: 0 
+            }]
+          },
+          options: { 
+            cutout: "75%", 
+            responsive: true, 
+            plugins: { 
+              legend: { display: false } 
+            },
+            animation: {
+              animateScale: true,
+              animateRotate: true
+            }
+          }
+        });
+      }
+      
+      // Soft Skills Charts
+      createChart("communicationChart", 90);
+      createChart("timeManagementChart", 85);
+      createChart("teamworkChart", 88);
+      createChart("creativityChart", 92);
+      
+      // Interests & Activities Charts
+      createChart("contentCreationChart", 80);
+      createChart("volleyballChart", 75);
+      createChart("problemSolvingChart", 87);
+      createChart("learningChart", 95);
+    });
+  </script>
+</body>
+</html>
